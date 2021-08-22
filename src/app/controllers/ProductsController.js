@@ -16,6 +16,25 @@ class ProductsController {
 
     response.json(productExists);
   }
+
+  store(request, response) {
+    const { name, price, urlImage } = request.body;
+
+    if (!name) {
+      return response.status(400).json({ errr: 'Name is required' });
+    }
+
+    const newUser = {
+      id: products[products.length - 1].id + 1,
+      name,
+      price,
+      urlImage,
+    };
+
+    products.push(newUser);
+
+    response.json(newUser);
+  }
 }
 
 module.exports = new ProductsController();
