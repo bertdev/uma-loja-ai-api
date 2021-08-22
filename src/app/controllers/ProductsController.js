@@ -63,6 +63,22 @@ class ProductsController {
       id, name, price, urlImage,
     });
   }
+
+  delete(request, response) {
+    const { id } = request.params;
+
+    const productExists = products.find((product) => product.id === Number(id));
+
+    if (!productExists) {
+      return response.status(404).json({ error: 'Product not found' });
+    }
+
+    products = products.filter((product) => (
+      product.id !== Number(id)
+    ));
+
+    response.json(204);
+  }
 }
 
 module.exports = new ProductsController();
