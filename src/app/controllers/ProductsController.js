@@ -1,4 +1,4 @@
-const products = require('../mocks/products');
+let products = require('../mocks/products');
 
 class ProductsController {
   index(request, response) {
@@ -34,6 +34,34 @@ class ProductsController {
     products.push(newUser);
 
     response.json(newUser);
+  }
+
+  update(request, response) {
+    const { id } = request.params;
+    const { name, price, urlImage } = request.body;
+
+    const productExists = products.find((product) => product.id === Number(id));
+
+    if (!productExists) {
+      return response.status(404).json({ error: 'Product not found' });
+    }
+
+    products = products.map((product) => {
+      if (product.id === Number(id)) {
+        const newProduct = {
+          id,
+          name,
+          price,
+          urlImage,
+        };
+        return newProduct;
+      }
+      return product;
+    });
+
+    response.json({
+      id, name, price, urlImage,
+    });
   }
 }
 
