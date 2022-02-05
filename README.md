@@ -17,5 +17,3 @@ Tentarei usar o github flow como workflow nesse projeto para começar a praticar
 - Nodemon
 - Eslint
 - Editorconfig
-
-teste
